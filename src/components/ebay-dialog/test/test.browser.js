@@ -1,13 +1,7 @@
 const expect = require('chai').expect;
 const renderer = require('../');
 
-describe('given the dialog is in the default state', () => {
-    let widget;
-    let root;
-    let dialog;
-    let close;
-    let sibling;
-
+function withIcon() {
     // Stub for the close button.
     const svg = document.createElement('svg');
     svg.innerHTML = '<symbol id="icon-close" viewBox="1.5 1.5 21 21"><path/></symbol>';
@@ -21,6 +15,16 @@ describe('given the dialog is in the default state', () => {
         // remove close button symbol.
         document.body.removeChild(svg);
     });
+}
+
+describe('given the dialog is in the default state', () => {
+    let widget;
+    let root;
+    let dialog;
+    let close;
+    let sibling;
+
+    withIcon();
 
     beforeEach(() => {
         sibling = document.createElement('div');
@@ -112,6 +116,8 @@ describe('given the dialog is in the open state', () => {
     let dialog;
     let close;
     let sibling;
+
+    withIcon();
 
     beforeEach(() => {
         sibling = document.createElement('div');

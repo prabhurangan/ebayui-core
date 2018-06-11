@@ -18,9 +18,30 @@ function testControlEvent(spy) {
     testUtils.testOriginalEvent(spy);
 }
 
+function withIcon() {
+    // Stub for the prev and next buttons.
+    const svg = document.createElement('svg');
+    svg.innerHTML = `
+        <symbol id="icon-chevron-left" viewBox="1.5 1.5 21 21"><path/></symbol>
+        <symbol id="icon-chevron-right" viewBox="1.5 1.5 21 21"><path/></symbol>
+    `;
+
+    before(() => {
+        // Add close button symbol.
+        document.body.insertBefore(svg, document.body.firstChild);
+    });
+
+    after(() => {
+        // remove close button symbol.
+        document.body.removeChild(svg);
+    });
+}
+
 describe('given the carousel is in the default state', () => {
     let widget;
     let root;
+
+    withIcon();
 
     beforeEach(() => {
         widget = renderer.renderSync().appendTo(document.body).getWidget();
@@ -46,6 +67,8 @@ describe('given the carousel starts in the default state with items', () => {
     let list;
     let prevButton;
     let nextButton;
+
+    withIcon();
 
     beforeEach(done => {
         widget = renderer.renderSync(input).appendTo(document.body).getWidget();
@@ -242,6 +265,8 @@ describe('given a continuous carousel has next button clicked', () => {
     let nextButton;
     let prevButton;
 
+    withIcon();
+
     beforeEach(done => {
         widget = renderer.renderSync(input).appendTo(document.body).getWidget();
         root = document.querySelector('.carousel');
@@ -319,6 +344,8 @@ describe('given a continuous carousel with few items', () => {
     let root;
     let list;
 
+    withIcon();
+
     beforeEach(done => {
         widget = renderer.renderSync(input).appendTo(document.body).getWidget();
         root = document.querySelector('.carousel');
@@ -352,6 +379,8 @@ describe('given a continuous carousel with many items', () => {
     let root;
     let prevButton;
     let nextButton;
+
+    withIcon();
 
     beforeEach(done => {
         widget = renderer.renderSync(input).appendTo(document.body).getWidget();
@@ -480,6 +509,8 @@ describe('given a discrete carousel', () => {
     let list;
     let nextButton;
 
+    withIcon();
+
     beforeEach(done => {
         widget = renderer.renderSync(input).appendTo(document.body).getWidget();
         root = document.querySelector('.carousel');
@@ -558,6 +589,8 @@ describe('given a discrete carousel has next button clicked', () => {
     let nextButton;
     let prevButton;
 
+    withIcon();
+
     beforeEach(done => {
         widget = renderer.renderSync(input).appendTo(document.body).getWidget();
         root = document.querySelector('.carousel');
@@ -628,6 +661,8 @@ describe('given a discrete carousel with half width items', () => {
     let list;
     let nextButton;
     let nextSlideDot;
+
+    withIcon();
 
     beforeEach(done => {
         widget = renderer.renderSync(input).appendTo(document.body).getWidget();
